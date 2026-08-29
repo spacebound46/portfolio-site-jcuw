@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jason Green | Full Stack Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #6366f1;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --card-bg: #f9fafb;
+            --border: #e5e7eb;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f172a;
+                --text: #f1f5f9;
+                --text-light: #cbd5e1;
+                --card-bg: #1e293b;
+                --border: #334155;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: transform 0.2s;
+            padding: 0.5rem;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .avatar {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tagline {
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .tagline h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .tagline p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+        }
+
+        /* Projects Grid */
+        .projects {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            grid-auto-rows: 1fr;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            border-color: var(--accent);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            flex-grow: 1;
+        }
+
+        .card:hover .card-title {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tagline h1 {
+                font-size: 1.875rem;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">Alex Rivera</div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="avatar">💻</div>
+        <div class="tagline">
+            <h1>Building digital experiences<br>that delight users</h1>
+            <p>Full stack developer with a passion for clean code and beautiful interfaces</p>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects">
+        <div id="gridContainer" class="grid">
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h2 class="card-title">TaskFlow Pro</h2>
+                <p class="card-description">AI-powered project management platform with real-time collaboration and automated workflow optimization.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h2 class="card-title">DataViz Studio</h2>
+                <p class="card-description">Interactive data visualization library enabling users to transform complex datasets into stunning visual stories.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h2 class="card-title">DesignKit</h2>
+                <p class="card-description">Component library with accessibility-first design patterns and seamless design-to-code handoff workflow.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔐</div>
+                <h2 class="card-title">SecureVault</h2>
+                <p class="card-description">End-to-end encrypted password manager with biometric authentication and zero-knowledge architecture.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const gridContainer = document.getElementById('gridContainer');
+        
+        function updateTheme() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = localStorage.getItem('theme') === 'dark' || 
+                          (!localStorage.getItem('theme') && prefersDark);
+            
+            if (isDark) {
+                document.documentElement.style.colorScheme = 'dark';
+                themeToggle.textContent = '☀️';
+            } else {
+                document.documentElement.style.colorScheme = 'light';
+                themeToggle.textContent = '🌙';
+            }
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.style.colorScheme === 'dark';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            updateTheme();
+        });
+
+        // Load GitHub repos if githubUser query param is provided
+        const params = new URLSearchParams(window.location.search);
+        const githubUser = params.get('github') || localStorage.getItem('githubUser');
+        
+        if (githubUser) {
+            loadGitHubRepos(githubUser);
+        }
+
+        function getRepoIcon(language) {
+            const icons = {
+                'TypeScript': '📘',
+                'JavaScript': '⚡',
+                'Python': '🐍',
+                'Go': '🐹',
+                'Rust': '🦀',
+                'React': '⚛️',
+                'Vue': '💚',
+                'C++': '⚙️',
+                'Java': '☕',
+                'Shell': '🐚'
+            };
+            return icons[language] || '📦';
+        }
+
+        async function loadGitHubRepos(username) {
+            try {
+                console.log(`🔄 Loading repos for ${username}...`);
+                const response = await fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=4`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const repos = await response.json();
+
+                if (!Array.isArray(repos)) {
+                    console.error('Invalid response:', repos);
+                    alert(`❌ GitHub user "${username}" not found or API error.\nUsing demo projects instead.`);
+                    return;
+                }
+
+                if (repos.length === 0) {
+                    alert(`⚠️ No public repositories found for "${username}".\nUsing demo projects instead.`);
+                    return;
+                }
+
+                localStorage.setItem('githubUser', username);
+                gridContainer.innerHTML = '';
+
+                repos.forEach(repo => {
+                    const icon = getRepoIcon(repo.language);
+                    const description = repo.description || 'A project by ' + username;
+                    const card = document.createElement('a');
+                    card.href = repo.html_url;
+                    card.target = '_blank';
+                    card.rel = 'noopener noreferrer';
+                    card.className = 'card';
+                    card.style.textDecoration = 'none';
+                    card.style.color = 'inherit';
+                    card.innerHTML = `
+                        <div class="card-icon">${icon}</div>
+                        <h2 class="card-title">${repo.name}</h2>
+                        <p class="card-description">${description.substring(0, 100)}</p>
+                    `;
+                    gridContainer.appendChild(card);
+                });
+
+                // Update page title with GitHub user
+                document.querySelector('.nav-brand').textContent = username;
+                console.log(`✅ Loaded ${repos.length} repos for ${username}`);
+            } catch (error) {
+                console.error('Error loading GitHub repos:', error);
+                alert(`❌ Could not load repos: ${error.message}\n\nNote: Local file:// pages may have CORS restrictions.\nTry deploying to a web server (GitHub Pages, Netlify, etc.)`);
+            }
+        }
+
+        // Check for keyboard shortcut: press 'g' to load GitHub repos
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'g' && !e.ctrlKey && !e.metaKey && e.target === document.body) {
+                const username = prompt('Enter your GitHub username:');
+                if (username) {
+                    loadGitHubRepos(username);
+                }
+            }
+        });
+        
+        updateTheme();
+    </script>
+</body>
+</html>
