@@ -225,36 +225,7 @@
     </section>
 
     <script>
-        const themeToggle = document.getElementById('themeToggle');
         const gridContainer = document.getElementById('gridContainer');
-        
-        function updateTheme() {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const isDark = localStorage.getItem('theme') === 'dark' || 
-                          (!localStorage.getItem('theme') && prefersDark);
-            
-            if (isDark) {
-                document.documentElement.style.colorScheme = 'dark';
-                themeToggle.textContent = '☀️';
-            } else {
-                document.documentElement.style.colorScheme = 'light';
-                themeToggle.textContent = '🌙';
-            }
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.style.colorScheme === 'dark';
-            localStorage.setItem('theme', isDark ? 'light' : 'dark');
-            updateTheme();
-        });
-
-        // Load GitHub repos if githubUser query param is provided
-        const params = new URLSearchParams(window.location.search);
-        const githubUser = params.get('github') || localStorage.getItem('githubUser');
-        
-        if (githubUser) {
-            loadGitHubRepos(githubUser);
-        }
 
         function getRepoIcon(language) {
             const icons = {
@@ -333,8 +304,41 @@
                 }
             }
         });
-        
-        updateTheme();
+
+        // Defer theme initialization to after DOMContentLoaded to unblock initial render
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('themeToggle');
+            
+            function updateTheme() {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isDark = localStorage.getItem('theme') === 'dark' || 
+                              (!localStorage.getItem('theme') && prefersDark);
+                
+                if (isDark) {
+                    document.documentElement.style.colorScheme = 'dark';
+                    themeToggle.textContent = '☀️';
+                } else {
+                    document.documentElement.style.colorScheme = 'light';
+                    themeToggle.textContent = '🌙';
+                }
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.documentElement.style.colorScheme === 'dark';
+                localStorage.setItem('theme', isDark ? 'light' : 'dark');
+                updateTheme();
+            });
+
+            // Load GitHub repos if githubUser query param is provided
+            const params = new URLSearchParams(window.location.search);
+            const githubUser = params.get('github') || localStorage.getItem('githubUser');
+            
+            if (githubUser) {
+                loadGitHubRepos(githubUser);
+            }
+            
+            updateTheme();
+        });
     </script>
 </body>
 </html>
